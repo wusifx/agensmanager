@@ -1,10 +1,10 @@
 databaseChangeLog:
   - changeSet:
-      id: 1
+      id: 20180805.1.create_developer_table
       author: huang.chao
       changes:
         - createTable:
-            tableName: user
+            tableName: developer
             columns:
               - column:
                   name: id
@@ -19,36 +19,36 @@ databaseChangeLog:
                   constraints:
                     nullable: false
               - column:
-                  name: developerId
+                  name: developer_id
                   type: varchar(255)
                   constraints:
                     nullable: false
               - column:
-                  name: salt
+                  name: rule
                   type: varchar(255)
                   constraints:
-                    nullable: false
+                    nullable: true
               - column:
-                  name: securityCode
+                  name: security_code
                   type: varchar(255)
                   constraints:
                     nullable: false
   - changeSet:
-      id: 2
+      id: 20180805.1.set_superman_data
       author: huang.chao
       changes:
         - insert:
-            tableName: user
+            tableName: developer
             columns:
               - column:
                   name: alias
                   value: superman
               - column:
-                  name: developerId
+                  name: developer_id
                   value: superman
               - column:
-                  name: salt
+                  name: rule
                   value: superman
               - column:
-                  name: securityCode
-                  value: superman
+                  name: security_code
+                  value: 8fe60c4f332a8387458a653fbdc7bac4

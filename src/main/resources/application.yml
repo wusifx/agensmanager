@@ -41,3 +41,6 @@ spring:
 
 security.filter:
   path: "/api/"
+
+error:
+  redirect.url: "/error"
