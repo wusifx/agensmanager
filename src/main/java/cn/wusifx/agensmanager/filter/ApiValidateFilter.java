@@ -1,5 +1,7 @@
 package cn.wusifx.agensmanager.filter;
 
+import cn.wusifx.agensmanager.AppConfig;
+import cn.wusifx.agensmanager.service.DeveloperService;
 import lombok.extern.slf4j.Slf4j;
 
 import javax.servlet.*;
@@ -9,6 +11,14 @@ import java.io.IOException;
 
 @Slf4j
 public class ApiValidateFilter implements Filter {
+    private DeveloperService developerService;
+    private AppConfig appConfig;
+
+    public ApiValidateFilter(DeveloperService developerService, AppConfig appConfig) {
+        this.developerService = developerService;
+        this.appConfig = appConfig;
+    }
+
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
 

@@ -38,9 +38,5 @@ spring:
     enabled: true
     change-log: classpath:/db/master.yaml
 
-
-security.filter:
-  path: "/api/"
-
 error:
   redirect.url: "/error"

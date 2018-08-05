@@ -3,7 +3,6 @@ package cn.wusifx.agensmanager.filter;
 import cn.wusifx.agensmanager.AppConfig;
 import cn.wusifx.agensmanager.service.DeveloperService;
 import liquibase.util.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 
 import javax.servlet.*;
@@ -12,10 +11,13 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 public class SupermanValidateFilter implements Filter {
-    @Autowired
-    DeveloperService developerService;
-    @Autowired
-    AppConfig appConfig;
+    private DeveloperService developerService;
+    private AppConfig appConfig;
+
+    public SupermanValidateFilter(DeveloperService developerService, AppConfig appConfig) {
+        this.developerService = developerService;
+        this.appConfig = appConfig;
+    }
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
@@ -30,15 +32,15 @@ public class SupermanValidateFilter implements Filter {
         String securityCode = httpServletRequest.getParameter("securityCode");
         String accessToken = httpServletRequest.getParameter("accessToken");
         HttpStatus status = HttpStatus.OK;
-        if(!StringUtils.isEmpty(accessToken)){
+        if (!StringUtils.isEmpty(accessToken)) {
             status = developerService.auth(accessToken);
-        }else {
-            status = developerService.auth(developerId,securityCode);
+        } else {
+            status = developerService.auth(developerId, securityCode);
         }
-        if(status== HttpStatus.OK) {
+        if (status == HttpStatus.OK) {
             filterChain.doFilter(servletRequest, servletResponse);
-        }else{
-            httpServletResponse.sendRedirect(String.format("/%s?status=%d",appConfig.getRedirectUrl(),status.value()));
+        } else {
+            httpServletResponse.sendRedirect(String.format("%s?status=%d", appConfig.getRedirectUrl(), status.value()));
         }
     }
 
