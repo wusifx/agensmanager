@@ -1,0 +1,35 @@
+---
+server:
+  port: 2018
+  session:
+    timeout: 7200
+
+logging:
+  file: ./agensmanager.log
+  level:
+    root: INFO
+    cn.wusifx: DEBUG
+    test: DEBUG
+
+spring.datasource:
+  type: com.alibaba.druid.pool.DruidDataSource
+  driver-class-name: net.bitnine.agensgraph.Driver
+  url: "jdbc:agensgraph://127.0.0.1:5432/agens"
+  username: agens
+  password: agens
+  initialSize: 5
+  minIdle: 5
+  maxActive: 20
+  maxWait: 60000
+  timeBetweenEvictionRunsMillis: 60000
+  minEvictableIdleTimeMillis: 300000
+  validationQuery: "SELECT 1;"
+  testWhileIdle: true
+  testOnBorrow: false
+  testOnReturn: false
+  poolPreparedStatements: true
+  maxPoolPreparedStatementPerConnectionSize: 20
+  filters: "stat,wall,log4j"
+  useGlobalDataSourceStat: true
+  #connectionProperties: "druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000"
+# 合并多个DruidDataSource的监控数据
