@@ -1,0 +1,54 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1
+      author: huang.chao
+      changes:
+        - createTable:
+            tableName: user
+            columns:
+              - column:
+                  name: id
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: alias
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: developerId
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: salt
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: securityCode
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+  - changeSet:
+      id: 2
+      author: huang.chao
+      changes:
+        - insert:
+            tableName: user
+            columns:
+              - column:
+                  name: alias
+                  value: superman
+              - column:
+                  name: developerId
+                  value: superman
+              - column:
+                  name: salt
+                  value: superman
+              - column:
+                  name: securityCode
+                  value: superman
