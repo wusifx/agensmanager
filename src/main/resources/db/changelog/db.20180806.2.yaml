@@ -1,0 +1,55 @@
+databaseChangeLog:
+  - changeSet:
+      id: 20180806.2.create_linkRule_table
+      author: huang.chao
+      changes:
+        - createTable:
+            tableName: link
+            columns:
+              - column:
+                  name: id
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: source_vlabel
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: source_property
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: target_vlabel
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: target_property
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: link_name
+                  type: varchar(255)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: link_type
+                  type: varchar(255)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: link_weight
+                  type: varchar(255)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: description
+                  type: varchar(255)
+                  constraints:
+                    nullable: true

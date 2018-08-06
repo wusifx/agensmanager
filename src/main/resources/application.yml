@@ -40,3 +40,6 @@ spring:
 
 error:
   redirect.url: "/error"
+
+agens:
+  graph.path: "agens";

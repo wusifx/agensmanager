@@ -5,7 +5,7 @@ import lombok.Setter;
 
 public class Developer {
     @Getter
-    private int id;
+    private Integer id;
     @Getter
     @Setter
     private String alias;

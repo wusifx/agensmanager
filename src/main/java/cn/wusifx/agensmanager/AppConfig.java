@@ -33,4 +33,7 @@ public class AppConfig {
     @Getter
     @Value("${error.redirect.url}")
     private String redirectUrl;
+    @Getter
+    @Value("${agens.graph.path}")
+    private String agensGraphPath;
 }
