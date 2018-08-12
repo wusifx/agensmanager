@@ -19,7 +19,7 @@ public class Api {
     @Autowired
     LinkRuleService linkRuleService;
 
-    @RequestMapping(path = "add/{vlabel}", method = RequestMethod.POST)
+    @RequestMapping(path = "add/{vLabel}", method = RequestMethod.POST)
     public HttpEntity<Map<String, Object>> addVLabel(@PathVariable String vLabel) {
         Pair<Integer, String> status = graphService.addVlabel(vLabel);
         return ResponseEntity.status(status.getLeft())
@@ -27,7 +27,7 @@ public class Api {
                 .build();
     }
 
-    @RequestMapping(path = "insert/{vlabel}", method = RequestMethod.POST)
+    @RequestMapping(path = "insert/{vLabel}", method = RequestMethod.POST)
     public HttpEntity<Map<String, Object>> insert2VLabel(@PathVariable String vLabel, @RequestBody Map<String, Object> data) {
         Pair<Integer, String> status = graphService.insert2Vlabel(vLabel, data);
         return ResponseEntity.status(status.getLeft())
@@ -35,7 +35,7 @@ public class Api {
                 .body(data);
     }
 
-    @RequestMapping(path = "remove/{vlabel}", method = RequestMethod.POST)
+    @RequestMapping(path = "remove/{vLabel}", method = RequestMethod.POST)
     public HttpEntity<Map<String, Object>> removeVLabel(@PathVariable String vLabel) {
         Pair<Integer, String> status = graphService.removeVlabel(vLabel);
         return ResponseEntity.status(status.getLeft())
@@ -43,7 +43,7 @@ public class Api {
                 .build();
     }
 
-    @RequestMapping(path = "delete/{vlabel}", method = RequestMethod.POST)
+    @RequestMapping(path = "delete/{vLabel}", method = RequestMethod.POST)
     public HttpEntity<Map<String, Object>> delete2VLabel(@PathVariable String vLabel, @RequestBody Map<String, Object> data) {
         Pair<Integer, String> status = graphService.delete2VLabel(vLabel, data);
         return ResponseEntity.status(status.getLeft())
@@ -54,9 +54,9 @@ public class Api {
     @RequestMapping(path = "add/elinkRule", method = RequestMethod.POST)
     public HttpEntity<Map<String, Object>> addELinkRule(@RequestBody Map<String, Object> data) {
         if (!data.containsKey("sourceVLabel")
-                && !data.containsKey("targetVLabel")
-                && !data.containsKey("sourceProperty")
-                && !data.containsKey("targetProperty")) {
+                || !data.containsKey("targetVLabel")
+                || !data.containsKey("sourceProperty")
+                || !data.containsKey("targetProperty")) {
             return ResponseEntity.badRequest().body(data);
         }
         String sourceVLabel = (String) data.get("sourceVLabel");

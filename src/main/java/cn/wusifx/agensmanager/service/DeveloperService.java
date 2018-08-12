@@ -2,6 +2,7 @@ package cn.wusifx.agensmanager.service;
 
 import cn.wusifx.agensmanager.bean.Developer;
 import liquibase.util.StringUtils;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -9,9 +10,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.DigestUtils;
 
 import java.util.UUID;
-
+@Slf4j
 @Service
 public class DeveloperService {
+    public DeveloperService(){
+        log.info("TBD");
+    }
     @Autowired
     JdbcTemplate jdbcTemplate;
 
