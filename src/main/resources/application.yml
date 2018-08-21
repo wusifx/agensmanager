@@ -42,3 +42,9 @@ error:
 
 agens:
   graph.path: "agens"
+
+webhook:
+  rest.connection:
+    connection-request-timeout: 3000
+    connect-timeout: 3000
+    read-timeout: 3000

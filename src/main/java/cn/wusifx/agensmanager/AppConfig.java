@@ -7,9 +7,12 @@ import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
+import org.springframework.web.client.RestTemplate;
 
 @Slf4j
 @Configuration
@@ -32,7 +35,15 @@ public class AppConfig {
         registrationBean.addUrlPatterns("/superman/*");
         return registrationBean;
     }
-
+    @Bean
+    @ConfigurationProperties(prefix = "webhook.rest.connection")
+    public HttpComponentsClientHttpRequestFactory customHttpRequestFactory() {
+        return new HttpComponentsClientHttpRequestFactory();
+    }
+    @Bean
+    public RestTemplate webhookRestTemplate(){
+        return new RestTemplate(customHttpRequestFactory());
+    }
     @Getter
     @Value("${error.redirect.url}")
     private String redirectUrl;

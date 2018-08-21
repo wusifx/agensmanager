@@ -1,6 +1,7 @@
 package cn.wusifx.agensmanager.service;
 
 import cn.wusifx.agensmanager.bean.Developer;
+import cn.wusifx.agensmanager.webhook.WebHookEventBus;
 import liquibase.util.StringUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,7 @@ import java.util.UUID;
 @Slf4j
 @Service
 public class DeveloperService {
+
     public DeveloperService(){
         log.info("TBD");
     }

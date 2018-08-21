@@ -1,6 +1,7 @@
 package cn.wusifx.agensmanager.service;
 
 import cn.wusifx.agensmanager.bean.Link;
+import cn.wusifx.agensmanager.webhook.WebHookEventBus;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -17,20 +18,24 @@ import java.util.Collection;
 @Service
 public class LinkRuleService {
     @Autowired
+    WebHookEventBus webHookEventBus;
+
+    @Autowired
     JdbcTemplate jdbcTemplate;
 
     public Link addLinkRule(Link link) {
         jdbcTemplate.update("insert into link(source_vlabel,source_property,target_vlabel,target_property,link_name,link_type,link_weight) values(?,?,?,?,?,?,?)"
                 , new Object[]{link.getSourceVLabel(), link.getSourceProperty(), link.getTargetVLabel(), link.getTargetProperty()
                         , link.getLinkName(), link.getLinkType(), link.getLinkWeight()});
+        webHookEventBus.sendLink(WebHookEventBus.DbType.RDB,WebHookEventBus.OperationType.INSERT,link);
         return link;
     }
 
     public Link removeLinkRule(int id) {
         String sql = "delete from link where id = ?";
         Link link = jdbcTemplate.queryForObject("select * from link where id = ?", (r, i) -> this.linkMap(r), id);
-
         jdbcTemplate.update(sql, new Object[]{id});
+        webHookEventBus.sendLink(WebHookEventBus.DbType.RDB,WebHookEventBus.OperationType.DELETE,link);
         return link;
     }
 
